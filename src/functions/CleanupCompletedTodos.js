@@ -21,9 +21,9 @@ app.timer('CleanupCompletedTodos', {
         try {
             const pool = await getPool();
             const deleteQuery = `
-                DELETE FROM todos
-                WHERE completed = 1
-                  AND completed_at <= DATEADD(minute, -5, SYSUTCDATETIME())
+                delete from [dbo].[Todos]
+                where isCompleted = 1
+                and createdAt <= DATEADD(minute, -5, SYSUTCDATETIME())
             `;
             const result = await pool.request().query(deleteQuery);
             const deletedCount = Array.isArray(result.rowsAffected) ? result.rowsAffected[0] : 0;
