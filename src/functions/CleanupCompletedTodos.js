@@ -29,7 +29,7 @@ app.timer('CleanupCompletedTodos', {
             const deletedCount = Array.isArray(result.rowsAffected) ? result.rowsAffected[0] : 0;
             context.log(`Removed ${deletedCount} completed todos older than 5 minutes.`);
         } catch (error) {
-            context.log.error('Failed to clean up completed todos', error);
+            context.log('Failed to clean up completed todos', error);
         }
     }
 });
