@@ -32,7 +32,7 @@ app.http('getTodos', {
                 jsonBody: result.recordset,
             };
         } catch (error) {
-            context.log.error('Failed to fetch todos', error);
+            context.error('Failed to fetch todos', error);
             return {
                 status: 500,
                 jsonBody: {

@@ -61,7 +61,7 @@ app.http('GetIssueSummary', {
                 jsonBody: summary,
             };
         } catch (error) {
-            context.log.error('Failed to fetch issue summary', error);
+            context.error('Failed to fetch issue summary', error);
             return {
                 status: 500,
                 jsonBody: {

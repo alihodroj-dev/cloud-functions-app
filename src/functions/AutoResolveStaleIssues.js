@@ -37,7 +37,7 @@ app.timer('AutoResolveStaleIssues', {
             
             context.log(`Auto-resolved ${updatedCount} stale low-severity issues older than 5 minutes.`);
         } catch (error) {
-            context.log.error('Failed to auto-resolve stale issues', error);
+            context.error('Failed to auto-resolve stale issues', error);
         }
     }
 });
