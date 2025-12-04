@@ -28,21 +28,21 @@ app.http('GetIssueSummary', {
             const totalResult = await pool.request().query('SELECT COUNT(*) as total FROM issues');
             const totalIssues = totalResult.recordset[0].total;
             
-            // Get open issues count
+            // Get open issues count (isResolved = 0 or false)
             const openResult = await pool.request().query(
-                "SELECT COUNT(*) as open FROM issues WHERE status = 'open'"
+                "SELECT COUNT(*) as open FROM issues WHERE isResolved = 0"
             );
             const openIssues = openResult.recordset[0].open;
             
-            // Get resolved issues count
+            // Get resolved issues count (isResolved = 1 or true)
             const resolvedResult = await pool.request().query(
-                "SELECT COUNT(*) as resolved FROM issues WHERE status = 'resolved'"
+                "SELECT COUNT(*) as resolved FROM issues WHERE isResolved = 1"
             );
             const resolvedIssues = resolvedResult.recordset[0].resolved;
             
             // Get high severity open issues count
             const highSeverityResult = await pool.request().query(
-                "SELECT COUNT(*) as highSeverity FROM issues WHERE status = 'open' AND severity = 'high'"
+                "SELECT COUNT(*) as highSeverity FROM issues WHERE isResolved = 0 AND severity = 'high'"
             );
             const highSeverityOpen = highSeverityResult.recordset[0].highSeverity;
             

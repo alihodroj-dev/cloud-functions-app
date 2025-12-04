@@ -22,14 +22,13 @@ app.timer('AutoResolveStaleIssues', {
         try {
             const pool = await getPool();
             
-            // Update low-severity issues older than 5 minutes to resolved status
+            // Update low-severity issues older than 5 minutes to resolved
             const updateQuery = `
                 UPDATE issues
-                SET status = 'resolved',
-                    resolved_at = SYSUTCDATETIME()
-                WHERE status = 'open'
+                SET isResolved = 1
+                WHERE isResolved = 0
                   AND severity = 'low'
-                  AND created_at <= DATEADD(minute, -5, SYSUTCDATETIME())
+                  AND createdAt <= DATEADD(minute, -5, SYSUTCDATETIME())
             `;
             
             const result = await pool.request().query(updateQuery);
