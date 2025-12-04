@@ -30,7 +30,7 @@ app.http('GetIssueSummary', {
             
             // Get open issues count (isResolved = 0 or false)
             const openResult = await pool.request().query(
-                "SELECT COUNT(*) as open FROM issues WHERE isResolved = 0"
+                "SELECT COUNT(*) as [open] FROM issues WHERE isResolved = 0"
             );
             const openIssues = openResult.recordset[0].open;
             
